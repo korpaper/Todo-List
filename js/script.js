@@ -53,23 +53,24 @@ const onChangeCheckBoxHandler = (idx) => {
 }
 
 // 삭제
-const setTodos = (newTodos) => {
-    todos = newTodos;
+const removeTodo = () => {
+    const getNewTodos = todos.filter((todo)=> todo.isDelete === true);
+    deleteBtn.addEventListener('click', getNewTodos)
 }
-
-const getAllTodos = () => {
-    return todos;
-}
-
-const deleteTodo = (idx) => {
-    const newTodos = todos.filter((todo) => todo.idx !== idx);
-    setTodos(newTodos);
+const onRemoveTodo = (idx) => {
+    const newTodos = todos.filter((todo) => todo.idx !== idx)[0];
+    if(isDelete === true){
+        removeTodo();
+    }
     console.log(newTodos)
 }
+// function deleteTodo(event){
+//     const todoList = event.target.parentElement;
+//     todoList.remove();
+// }
 
 checkToday();
 write();
-
 
 addTodoBtn.addEventListener('click', function(){
     if (inputBox.value === "") {
@@ -82,8 +83,8 @@ addTodoBtn.addEventListener('click', function(){
         <input type="checkbox" name="todo" />
         <label >
             <span>${inputBox.value}</span>
-            <button class="delete" onclick='deleteTodo();'>x</button>
         </label>
+        <button class="delete" onclick='deleteTodo(event);'>x</button>
     `
     todoList.appendChild(list);
     
