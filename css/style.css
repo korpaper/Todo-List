@@ -1,0 +1,176 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+button{
+    border: 0;
+    background: none;
+}
+i{
+    text-decoration: none
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+.todo-wrap{
+    position: relative;
+    width: 500px;
+    height: 700px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.16);
+    /* overflow: hidden; */
+}
+.top{
+    width: 100%;
+    height: 30%;
+    padding: 30px;
+    border-bottom: 1px solid #ccc;
+}
+.top p:first-child{
+    font-size: 40px;
+}
+.top p:nth-of-type(2){
+    padding-top: 5px;
+}
+.top p:last-child{
+    padding-top: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(79, 212, 79);
+}
+.bottom{
+    padding: 30px;
+}
+.checking{
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+.checking input{
+    margin-right: 8px;
+    cursor: pointer;
+}
+.checking input[type="checkbox"] {
+    appearance: none;
+    position: relative;
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+}
+.checking input[type="checkbox"]:checked::after {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    display: inline-block;
+    content: "✔";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    color: rgb(79, 212, 79);
+    border: 2px solid rgb(79, 212, 79);
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.checking input[type="checkbox"]:checked + label span{
+    color: #ccc;
+    text-decoration: line-through;
+}
+.delete{
+    padding: 0 0 5px 5px;
+}
+.open{
+    position: absolute;
+    left: 50%;
+    bottom: -25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    padding-bottom: 2px;
+    background-color: lightgreen;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 45px;
+    color: #fff;
+    transition: all .2s;
+}
+.open:hover{
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+    color: #000;
+}
+/* 입력폼 */
+.push.hidden{
+    display: none;
+}
+.push{
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.16);
+}
+.push-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 350px;
+    height: 100px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.16);
+}
+.input{
+    display: flex;
+    align-items: center;
+}
+.input label{
+    margin-right: 8px;
+}
+.input input{
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+.input input:focus{
+    outline: none;
+}
+.btns button{
+    width: 40px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btns button:first-child{
+    margin-right: 8px;
+    background-color: lightgreen;
+    border: 0;
+}
