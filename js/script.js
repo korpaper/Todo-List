@@ -14,8 +14,6 @@ let addTodoBtn = document.querySelector('.add');
 // todo 삭제
 let deleteBtn = document.querySelector('.delete');
 
-const TODOS_KEY = "todos"
-
 // 오늘날짜
 const checkToday = () => {
     date = new Date();
@@ -26,12 +24,7 @@ const checkToday = () => {
     const today = new Date().getDay();
     
     document.querySelector('.top p:first-child').innerText = year + '년' + month + '월' + day + '일';
-    document.querySelector('.top p:first-child').innerText = year + '년' + month + '월' + day + '일';
     document.querySelector('.top p:nth-of-type(2)').innerText = (week[today]) + '요일';
-}
-// 로컬 스토리지에 todos 를 만들고 해당 배열을 가져와서 문자열로 만듬.
-function saveToDos() {
-    localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 
 function write(){
@@ -58,46 +51,17 @@ const onChangeCheckBoxHandler = (idx) => {
     countTodoLength();
 }
 
-// 삭제
-// const removeTodo = () => {
-//     const getNewTodos = todos.filter((todo)=> todo.isDelete === true);
-//     deleteBtn.addEventListener('click', getNewTodos)
-// }
-// const onRemoveTodo = (idx) => {
-//     const newTodos = todos.filter((todo) => todo.idx !== idx)[0];
-//     if(isDelete === true){
-//         removeTodo();
-//     }
-//     console.log(newTodos)
-// }
-// const deleteTodo = () => {
-//     const deletedTodo = todos.filter((todo)=> todo.isDelete !== false);
-//     return todos;
-// }
-// const onDeleteTodo = (idx) => {
-//     console.log(idx)
-//     const newTodos = todos.filter((todo) => todo.idx !== idx)[todos];
-//     console.log(newTodos)
-//     newTodos.isDelete = true;
-//     deleteTodo();
-// }
-
 //filter 는 t 는 반환 f 는 거름 => 새로운 배열로 반환.
 //let todos = [] 를 기억할 것(이 곳에 값들이 모임)
-function deleteToDo(event) {
-    const removeList = event.target.parentElement;
+function deleteToDo(e, idx) {
+    const removeList = e.target.parentElement;
     removeList.remove();
     // todo 의 idx 랑 지운 것의 idx 랑 같지 않으면 걸러라ㅏㅏㅏㅏㅏㅏㅏ
-    todos = todos.filter((todo) => todo.idx !== parseInt(removeList.idx));
-    //console.log(typeof removeLi.id) 지운 리스트의 값이 문자열로 나와서 parseInt 정수로 바꿔줌
-    //근데 배열이 새로 왜 안나오냐 하 
-    // 다시 로컬 스토리지에 저장한다는 뜻
-    saveToDos();
+    todos = todos.filter((todo) => todo.idx !== idx);
     console.log(removeList)
     console.log("-----", todos)
-    //왜 남아있냐????
+    countTodoLength()
 }
-
 
 checkToday();
 write();
@@ -114,7 +78,7 @@ addTodoBtn.addEventListener('click', function(){
     <label >
     <span>${inputBox.value}</span>
     </label>
-    <button class="delete" onclick='deleteToDo(event);'>x</button>
+    <button class="delete" >x</button>
     `
     todoList.appendChild(list);
     
@@ -132,5 +96,9 @@ addTodoBtn.addEventListener('click', function(){
     list.querySelector('input').addEventListener('change', ()=> {
         onChangeCheckBoxHandler(todo.idx)
     })
+    list.querySelector('.delete').addEventListener('click', (e)=> {
+        // onChangeCheckBoxHandler(todo.idx)
+        deleteToDo(e, todo.idx)
+    })    
 });
 
